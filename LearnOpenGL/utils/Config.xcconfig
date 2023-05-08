@@ -1,0 +1,15 @@
+//
+//  Config.xcconfig
+//  LearnOpenGL
+//
+//  Created by MC on 2023/5/7.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/vendor/"
+LIBRARY_SEARCH_PATHS = $(inherited) "$(SRCROOT)/vendor/GLFW"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) "$(SRCROOT)/vendor/GLFW"
+DYLD_LIBRARY_PATH = $(inherited) "$(SRCROOT)/vendor/GLFW"
+OTHER_LDFLAGS = $(inherited) -lglfw.3
