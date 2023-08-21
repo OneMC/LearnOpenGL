@@ -528,4 +528,4 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,jetbrains+all,visualstudio,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/xcode,cocoapods,jetbrains+all,visualstudio,visualstudiocode.DS_Store
