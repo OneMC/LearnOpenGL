@@ -1,0 +1,13 @@
+//
+//  BuildConfig.xcconfig
+//  LearnOpenGL
+//
+//  Created by ONEMC on 2023/7/3.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../vendor/assimp" "$(SRCROOT)/../vendor" "$(SRCROOT)/../vendor/stb_image" "$(SRCROOT)/../vendor/glm" "$(SRCROOT)/../vendor/khr"
+LIBRARY_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../vendor/assimp" "$(SRCROOT)/../vendor/GLFW"
+OTHER_LDFLAGS = $(inherited) -lglfw -lassimp
