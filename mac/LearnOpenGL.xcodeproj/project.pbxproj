@@ -437,7 +437,7 @@
 			path = quad;
 			sourceTree = "<group>";
 		};
-		4C7A51BC2A7406A5005C7FD6 /* debug */ = {
+		4C7A51BC2A7406A5005C7FD6 /* debug_shader */ = {
 			isa = PBXGroup;
 			children = (
 				4C7A51BD2A7406DE005C7FD6 /* fbo_debug_fragment.fsh */,
@@ -445,7 +445,7 @@
 				540DFD192A57F8220005B49E /* debug_opengl.hpp */,
 				540DFD1E2A57F8220005B49E /* debug_opengl.cpp */,
 			);
-			path = debug;
+			path = debug_shader;
 			sourceTree = "<group>";
 		};
 		4CB1E1F32A531887007274D7 = {
@@ -709,10 +709,10 @@
 		540DFD172A57F8220005B49E /* common */ = {
 			isa = PBXGroup;
 			children = (
+				4C7A51BC2A7406A5005C7FD6 /* debug_shader */,
 				4CB724C72A8FCB1500769417 /* config_window.cpp */,
 				4CB724C52A8FCB1500769417 /* config_window.hpp */,
 				4CB724C62A8FCB1500769417 /* path.h */,
-				4C7A51BC2A7406A5005C7FD6 /* debug */,
 				4C044FB02A5F710400F3B58F /* mesh.h */,
 				4C044FAF2A5F710400F3B58F /* model.h */,
 				4C7549992A5865E90063E5C0 /* camera.h */,
