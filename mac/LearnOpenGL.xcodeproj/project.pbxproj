@@ -744,9 +744,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CB1E2032A531887007274D7 /* Build configuration list for PBXNativeTarget "LearnOpenGL" */;
 			buildPhases = (
+				4CB724C42A8FCAC300769417 /* Generate Path */,
 				4CB1E1F82A531887007274D7 /* Sources */,
 				4CB1E1FA2A531887007274D7 /* CopyFiles */,
-				4CB724C42A8FCAC300769417 /* Generate Path */,
 			);
 			buildRules = (
 			);
