@@ -8,6 +8,7 @@
 #ifndef texture_hpp
 #define texture_hpp
 
+#include <vector>
 #include <iostream>
 #include <glad/glad.h>
 

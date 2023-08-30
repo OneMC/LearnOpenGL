@@ -9,7 +9,7 @@
 #define camera_base_render_hpp
 
 #include "render.hpp"
-#include "Camera.h"
+#include "camera.h"
 
 extern unsigned int SCR_WIDTH;
 extern unsigned int SCR_HEIGHT;

@@ -78,7 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\vendor\GlFW\;$(ProjectDir)..\vendor\glad\;$(ProjectDir)..\vendor\glm\;$(ProjectDir)..\vendor\khr\;$(ProjectDir)..\vendor\stb_image\;$(ProjectDir)..\vendor\assimp\;$(ProjectDir)..\src\common;$(ProjectDir)..\src\render\triangle_render\;$(ProjectDir)..\src\render\texture_render\;$(ProjectDir)..\src\render\;$(ProjectDir)..\vendor\;$(ProjectDir)..\src\render\camera_render\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\src\common;$(ProjectDir)..\src\common\debug_shader\;$(ProjectDir)..\vendor\;$(ProjectDir)..\vendor\GlFW\;$(ProjectDir)..\vendor\glad\;$(ProjectDir)..\vendor\glm\;$(ProjectDir)..\vendor\khr\;$(ProjectDir)..\vendor\stb_image\;$(ProjectDir)..\vendor\assimp\;$(ProjectDir)..\src\render\;$(ProjectDir)..\src\render\depth_test_render\;$(ProjectDir)..\src\render\cubemap_render\;$(ProjectDir)..\src\render\camera_render\;$(ProjectDir)..\src\render\blend_render\;$(ProjectDir)..\src\render\bloom_render\;$(ProjectDir)..\src\render\deferred_render\;$(ProjectDir)..\src\render\anti_aliasing_render\;$(ProjectDir)..\src\render\geometry_render\;$(ProjectDir)..\src\render\framebuffer_render\;$(ProjectDir)..\src\render\triangle_render\;$(ProjectDir)..\src\render\blinn_phong_render\;$(ProjectDir)..\src\render\instance_render\quad\;$(ProjectDir)..\src\render\instance_render\asteroid\;$(ProjectDir)..\src\render\stencil_test_render\;$(ProjectDir)..\src\render\model_render\;$(ProjectDir)..\src\render\ssao_render\;$(ProjectDir)..\src\render\shadow_render\;$(ProjectDir)..\src\render\normal_mapping_render\;$(ProjectDir)..\src\render\texture_render\;$(ProjectDir)..\src\render\pbr_render\irradiance_conversion\;$(ProjectDir)..\src\render\pbr_render\irradiance\;$(ProjectDir)..\src\render\pbr_render\lighting\;$(ProjectDir)..\src\render\pbr_render\specular\;$(ProjectDir)..\src\render\pbr_render\specular_textured\;$(ProjectDir)..\src\render\pbr_render\textured\;$(ProjectDir)..\src\render\common\debug_shader\;$(ProjectDir)..\src\render\parallax_render\;$(ProjectDir)..\src\render\hdr_render\;$(IncludePath)</IncludePath>
+    <ReferencePath>$(ProjectDir)..\vendor\libs\;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -122,6 +123,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)generate_path.bat"</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -140,26 +148,82 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\common\debug_opengl.cpp" />
+    <ClCompile Include="..\src\common\config_window.cpp" />
+    <ClCompile Include="..\src\common\debug_shader\debug_opengl.cpp" />
     <ClCompile Include="..\src\common\resource.cpp" />
+    <ClCompile Include="..\src\common\shader_tool.cpp" />
     <ClCompile Include="..\src\common\texture.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\render\camera_render\camera_render.cpp" />
-    <ClCompile Include="..\src\render\render.cpp" />
+    <ClCompile Include="..\src\render\anti_aliasing_render\anti_aliasing_render.cpp" />
+    <ClCompile Include="..\src\render\blend_render\blend_render.cpp" />
+    <ClCompile Include="..\src\render\blinn_phong_render\blinn_phong_render.cpp" />
+    <ClCompile Include="..\src\render\bloom_render\bloom_render.cpp" />
+    <ClCompile Include="..\src\render\camera_render\camera_base_render.cpp" />
+    <ClCompile Include="..\src\render\camera_render\camera_container_render.cpp" />
+    <ClCompile Include="..\src\render\cubemap_render\cubemap_render.cpp" />
+    <ClCompile Include="..\src\render\deferred_render\deferred_render.cpp" />
+    <ClCompile Include="..\src\render\depth_test_render\depth_test_render.cpp" />
+    <ClCompile Include="..\src\render\framebuffer_render\framebuffer_render.cpp" />
+    <ClCompile Include="..\src\render\geometry_render\geometry_render.cpp" />
+    <ClCompile Include="..\src\render\hdr_render\hdr_render.cpp" />
+    <ClCompile Include="..\src\render\instance_render\asteroid\instance_asteroid_render.cpp" />
+    <ClCompile Include="..\src\render\instance_render\quad\instance_quad_render.cpp" />
+    <ClCompile Include="..\src\render\model_render\model_render.cpp" />
+    <ClCompile Include="..\src\render\normal_mapping_render\normal_mapping_render.cpp" />
+    <ClCompile Include="..\src\render\parallax_render\parallax_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\irradiance\ibl_irradiance_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\irradiance_conversion\ibl_irradiance_conversion_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\lighting\pbr_lighting_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\specular\ibl_specular_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\specular_textured\ibl_specular_textured_render.cpp" />
+    <ClCompile Include="..\src\render\pbr_render\textured\pbr_textured_render.cpp" />
+    <ClCompile Include="..\src\render\shadow_render\shadow_render.cpp" />
+    <ClCompile Include="..\src\render\ssao_render\ssao_render.cpp" />
+    <ClCompile Include="..\src\render\stencil_test_render\stencil_test_render.cpp" />
     <ClCompile Include="..\src\render\texture_render\texture_render.cpp" />
     <ClCompile Include="..\src\render\triangle_render\triangle_render.cpp" />
     <ClCompile Include="..\vendor\glad\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\common\camera.h" />
-    <ClInclude Include="..\src\common\debug_opengl.hpp" />
+    <ClInclude Include="..\src\common\config_window.hpp" />
+    <ClInclude Include="..\src\common\debug_shader\debug_opengl.hpp" />
+    <ClInclude Include="..\src\common\mesh.h" />
+    <ClInclude Include="..\src\common\model.h" />
+    <ClInclude Include="..\src\common\path.h" />
     <ClInclude Include="..\src\common\resource.hpp" />
     <ClInclude Include="..\src\common\Shader.h" />
+    <ClInclude Include="..\src\common\shader_tool.hpp" />
     <ClInclude Include="..\src\common\texture.hpp" />
     <ClInclude Include="..\src\common\vertex_data.h" />
-    <ClInclude Include="..\src\render\camera_render\camera_render.hpp" />
+    <ClInclude Include="..\src\render\anti_aliasing_render\anti_aliasing_render.hpp" />
+    <ClInclude Include="..\src\render\blend_render\blend_render.hpp" />
+    <ClInclude Include="..\src\render\blinn_phong_render\blinn_phong_render.hpp" />
+    <ClInclude Include="..\src\render\bloom_render\bloom_render.hpp" />
+    <ClInclude Include="..\src\render\camera_render\camera_base_render.hpp" />
+    <ClInclude Include="..\src\render\camera_render\camera_container_render.hpp" />
+    <ClInclude Include="..\src\render\cubemap_render\cubemap_render.hpp" />
+    <ClInclude Include="..\src\render\deferred_render\deferred_render.hpp" />
+    <ClInclude Include="..\src\render\depth_test_render\depth_test_render.hpp" />
+    <ClInclude Include="..\src\render\framebuffer_render\framebuffer_render.hpp" />
+    <ClInclude Include="..\src\render\geometry_render\geometry_render.hpp" />
+    <ClInclude Include="..\src\render\hdr_render\hdr_render.hpp" />
+    <ClInclude Include="..\src\render\instance_render\asteroid\instance_asteroid_render.hpp" />
+    <ClInclude Include="..\src\render\instance_render\quad\instance_quad_render.hpp" />
+    <ClInclude Include="..\src\render\model_render\model_render.hpp" />
+    <ClInclude Include="..\src\render\normal_mapping_render\normal_mapping_render.hpp" />
+    <ClInclude Include="..\src\render\parallax_render\parallax_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\irradiance\ibl_irradiance_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\irradiance_conversion\ibl_irradiance_conversion_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\lighting\pbr_lighting_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\specular\ibl_specular_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\specular_textured\ibl_specular_textured_render.hpp" />
+    <ClInclude Include="..\src\render\pbr_render\textured\pbr_textured_render.hpp" />
     <ClInclude Include="..\src\render\render.hpp" />
     <ClInclude Include="..\src\render\renderer_collection.h" />
+    <ClInclude Include="..\src\render\shadow_render\shadow_render.hpp" />
+    <ClInclude Include="..\src\render\ssao_render\ssao_render.hpp" />
+    <ClInclude Include="..\src\render\stencil_test_render\stencil_test_render.hpp" />
     <ClInclude Include="..\src\render\texture_render\texture_render.hpp" />
     <ClInclude Include="..\src\render\triangle_render\triangle_render.hpp" />
     <ClInclude Include="..\vendor\glad\glad.h" />

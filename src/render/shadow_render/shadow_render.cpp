@@ -15,6 +15,7 @@ static unsigned int Screen_scale = 2; // mac need scale
 static unsigned int SHADOW_WIDTH = 1024 * Screen_scale;
 static unsigned int SHADOW_HEIGHT = 1024 * Screen_scale;
 #else
+static unsigned int Screen_scale = 1;
 static unsigned int SHADOW_WIDTH = 1024;
 static unsigned int SHADOW_HEIGHT = 1024;
 #endif
