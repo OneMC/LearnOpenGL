@@ -8,15 +8,6 @@
 #include "deferred_render.hpp"
 #include "shader_tool.hpp"
 
-#ifdef __APPLE__
-static unsigned int Screen_scale = 2; // mac need scale
-static unsigned int _SCREEN_WIDTH = SCR_WIDTH * Screen_scale;
-static unsigned int _SCREEN_HEIGHT = SCR_HEIGHT * Screen_scale;
-#else
-static unsigned int _SCREEN_WIDTH = SCR_WIDTH;
-static unsigned int _SCREEN_HEIGHT = SCR_HEIGHT;
-#endif
-
 void DeferredRender::setup() {
     setupLightingShader();
     setupGBuffer();
@@ -57,7 +48,7 @@ void DeferredRender::setupGBuffer() {
     // position color buffer
     glGenTextures(1, &gPosition);
     glBindTexture(GL_TEXTURE_2D, gPosition);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _SCREEN_WIDTH, _SCREEN_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
@@ -65,7 +56,7 @@ void DeferredRender::setupGBuffer() {
     // normal color buffer
     glGenTextures(1, &gNormal);
     glBindTexture(GL_TEXTURE_2D, gNormal);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _SCREEN_WIDTH, _SCREEN_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
@@ -73,7 +64,7 @@ void DeferredRender::setupGBuffer() {
     // color + specular color buffer
     glGenTextures(1, &gAlbedoSpec);
     glBindTexture(GL_TEXTURE_2D, gAlbedoSpec);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _SCREEN_WIDTH, _SCREEN_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gAlbedoSpec, 0);
@@ -85,7 +76,7 @@ void DeferredRender::setupGBuffer() {
     unsigned int rboDepth;
     glGenRenderbuffers(1, &rboDepth);
     glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _SCREEN_WIDTH, _SCREEN_HEIGHT);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
     
     // finally check if framebuffer is complete
@@ -180,7 +171,7 @@ void DeferredRender::renderLightWithGBuffer() {
     // blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
     // the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the
     // depth buffer in another shader stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
-    glBlitFramebuffer(0, 0, _SCREEN_WIDTH, _SCREEN_HEIGHT, 0, 0, _SCREEN_WIDTH, _SCREEN_HEIGHT, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBlitFramebuffer(0, 0, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, 0, 0, SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

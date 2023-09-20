@@ -8,6 +8,9 @@
 #ifndef shader_tool_hpp
 #define shader_tool_hpp
 
+extern unsigned int SCREEN_PIXEL_WIDTH;
+extern unsigned int SCREEN_PIXEL_HEIGHT;
+
 unsigned int setupCubeVertex();
 unsigned int setupCubeVertexNormal();
 unsigned int setupCubeVertexMSAA();

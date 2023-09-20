@@ -42,6 +42,7 @@
 		540DFD262A57F8220005B49E /* debug_opengl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 540DFD1E2A57F8220005B49E /* debug_opengl.cpp */; };
 		540DFD272A57F8220005B49E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 540DFD202A57F8220005B49E /* main.cpp */; };
 		540DFD2B2A57F8D00005B49E /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 540DFD292A57F8D00005B49E /* glad.c */; };
+		54BAB8802ABAE4060010C804 /* bmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54BAB87E2ABAE4060010C804 /* bmp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -236,6 +237,8 @@
 		540DFD282A57F8370005B49E /* xcodeConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = xcodeConfig.xcconfig; sourceTree = "<group>"; };
 		540DFD292A57F8D00005B49E /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glad.c; path = ../vendor/glad/glad.c; sourceTree = "<group>"; };
 		540DFD2A2A57F8D00005B49E /* glad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glad.h; path = ../vendor/glad/glad.h; sourceTree = "<group>"; };
+		54BAB87E2ABAE4060010C804 /* bmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bmp.cpp; path = ../vendor/bmp/bmp.cpp; sourceTree = "<group>"; };
+		54BAB87F2ABAE4060010C804 /* bmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bmp.h; path = ../vendor/bmp/bmp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -731,6 +734,8 @@
 		540DFD2C2A57F8D60005B49E /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				54BAB87E2ABAE4060010C804 /* bmp.cpp */,
+				54BAB87F2ABAE4060010C804 /* bmp.h */,
 				540DFD292A57F8D00005B49E /* glad.c */,
 				540DFD2A2A57F8D00005B49E /* glad.h */,
 			);
@@ -818,6 +823,7 @@
 				4CB724C82A8FCB6C00769417 /* ibl_specular_render.cpp in Sources */,
 				4CB724C92A8FCB6C00769417 /* pbr_textured_render.cpp in Sources */,
 				4CB724CA2A8FCB6C00769417 /* ibl_specular_textured_render.cpp in Sources */,
+				54BAB8802ABAE4060010C804 /* bmp.cpp in Sources */,
 				4CB724CB2A8FCB6C00769417 /* ibl_irradiance_conversion_render.cpp in Sources */,
 				4CB724CC2A8FCB6C00769417 /* pbr_lighting_render.cpp in Sources */,
 				4CB724CD2A8FCB6C00769417 /* ibl_irradiance_render.cpp in Sources */,

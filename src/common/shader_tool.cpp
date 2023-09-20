@@ -14,11 +14,22 @@
 #include "debug_opengl.hpp"
 #include "vertex_data.h"
 
+extern unsigned int SCR_WIDTH;
+extern unsigned int SCR_HEIGHT;
 extern float CameraRenderVertex[180];
 extern float SkyboxVertices[108];
 extern float CubeNormalVertices[216];
 extern float CubeVertices[216];
 extern float CubeVerticesMSAA[108];
+
+#ifdef __APPLE__
+static unsigned int Screen_scale = 2; // mac need scale
+unsigned int SCREEN_PIXEL_WIDTH = SCR_WIDTH * Screen_scale;
+unsigned int SCREEN_PIXEL_HEIGHT = SCR_HEIGHT * Screen_scale;
+#else
+unsigned int SCREEN_PIXEL_WIDTH = SCR_WIDTH;
+unsigned int SCREEN_PIXEL_HEIGHT = SCR_HEIGHT;
+#endif
 
 unsigned int setupCubeVertex() {
     unsigned int VBO, VAO;

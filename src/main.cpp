@@ -27,6 +27,7 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
         render->render();
+        capture(SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, R::file("snapshot.bmp").c_str());
 
         glfwSwapBuffers(window);
         glfwPollEvents();

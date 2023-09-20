@@ -24,4 +24,7 @@ void APIENTRY glDebugOutput(GLenum source,
                             const char *message,
                             const void *userParam);
 
+// In Apple's platform, width and height need to be multiplied by scale
+void capture(uint32_t width, uint32_t height, const char* fileName);
+
 #endif /* Debug_hpp */

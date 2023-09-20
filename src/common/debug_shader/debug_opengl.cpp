@@ -8,6 +8,9 @@
 #include "debug_opengl.hpp"
 #include "render.hpp"
 #include "resource.hpp"
+#include <iostream>
+#include <fstream>
+#include "bmp.h"
 
 void DisplayFramebufferTexture(unsigned int textureID) {
     static Shader shader = Shader(R::file("src/common/debug/fbo_debug_vertex.vsh"),
@@ -119,4 +122,48 @@ void APIENTRY glDebugOutput(GLenum source,
         case GL_DEBUG_SEVERITY_LOW:          printf("Severity: low"); break;
         case GL_DEBUG_SEVERITY_NOTIFICATION: printf("Severity: notification"); break;
     }
+}
+
+
+void _readPixelsToBMP(uint32_t width, uint32_t height, const char* filename){
+    GLubyte* pixels = (unsigned char*)malloc(width*height*3);
+
+    // read the content from fbo
+    // 'GL_COLOR_ATTACHMENT0' is default value
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glReadBuffer.xhtml
+//    glReadBuffer(GL_COLOR_ATTACHMENT0);
+
+    // GL_UNPACK_ALIGNMENT=1 is default value
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPixelStore.xhtml
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    // format-color values: GL_RED, GL_GREEN, GL_BLUE, GL_RGB, GL_BGR, GL_RGBA, GL_BGRA
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glReadPixels.xhtml
+    glReadPixels(0, 0, width, height, GL_BGR, GL_UNSIGNED_BYTE, pixels);
+    glCheckError();
+    RGBInfoNode *rbgInfo = (RGBInfoNode*)pixels;
+    BMP bmp = BMP(rbgInfo, width, height);
+    bmp.write(filename,true);
+}
+
+void capture(uint32_t width, uint32_t height, const char* filename) {
+    static char* captureOnceFlag = nullptr;
+    if (captureOnceFlag!=nullptr) {
+        if (strcmp(captureOnceFlag, filename)==0) {
+            return;
+        } else {
+            delete captureOnceFlag;
+        }
+    }
+    captureOnceFlag = new char[strlen(filename) + 1];
+    strcpy(captureOnceFlag, filename);
+
+    std::ifstream file(filename);
+    if(!file.good()){
+        std::ofstream file(filename);
+        file.close();
+    }
+
+    _readPixelsToBMP(width, height, filename);
+    printf("capture screen to %s\n",filename);
 }
