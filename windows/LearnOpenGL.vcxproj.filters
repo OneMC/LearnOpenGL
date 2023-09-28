@@ -120,6 +120,9 @@
     <ClCompile Include="..\src\render\anti_aliasing_render\anti_aliasing_render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\vendor\bmp\bmp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\common\resource.hpp">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="..\src\render\anti_aliasing_render\anti_aliasing_render.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\bmp\bmp.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,13 +15,20 @@
 #include <cstdlib>
 #include <cstring>
 
+#ifdef __GNUC__
+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
+#endif
+
+#ifdef _MSC_VER
+#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#endif
+
 // BRG
-typedef struct
-{
+PACK(typedef struct {
     uint8_t blue;     // 蓝色强度
     uint8_t green;    // 绿色强度
     uint8_t red;      // 红色强度
-}__attribute__((__packed__))RGBInfoNode;
+})RGBInfoNode;
 
 /* BMP位图数据 24，32位深适用*/
 class BMP
@@ -102,23 +109,23 @@ public:
 private:
 
 #ifdef _WIN32
-typedef struct  // BMP文件头结构，14byte
+PACK(typedef struct  // BMP文件头结构，14byte
 {
     //uint16_t bfType;      // 2byte，位图文件的类型，标识，就是“BM”二字
     uint32_t bfSize;        // 4byte，位图文件的大小
     uint32_t bfReserved;    // 4byte，位图文件保留字，必须为0
     uint32_t bfOffBits;     // 4byte，偏移数，即位图文件头+位图信息头+调色板的大小
-}__attribute__((__packed__))BitmapFileNode;
+})BitmapFileNode;
 #elif __APPLE__
     #include "TargetConditionals.h"
     #if TARGET_OS_MAC
-typedef struct  // BMP文件头结构，14byte
+PACK(typedef struct  // BMP文件头结构，14byte
 {
     uint16_t bfType;        // 2byte，位图文件的类型，标识，就是“BM”二字
     uint32_t bfSize;        // 4byte，位图文件的大小
     uint32_t bfReserved;    // 4byte，位图文件保留字，必须为0
     uint32_t bfOffBits;     // 4byte，偏移数，即位图文件头+位图信息头+调色板的大小
-}__attribute__((__packed__))BitmapFileNode;
+})BitmapFileNode;
     #else
         #error "Unknown Apple platform"
     #endif
@@ -126,7 +133,7 @@ typedef struct  // BMP文件头结构，14byte
     #error "Unknown compiler"
 #endif
 
-typedef struct // 图像信息区，40byte
+PACK(typedef struct // 图像信息区，40byte
 {
     uint32_t biSize;            // 4byte，位图信息头的大小
     uint32_t biWidth;           // 4byte，位图的宽度，以像素为单位
@@ -139,14 +146,14 @@ typedef struct // 图像信息区，40byte
     uint32_t biYPelsPerMeter;   // 4byte，垂直分辨率(像素/米)
     uint32_t biClrUsed;         // 4byte，位图使用的颜色数，如果为0，则颜色数为2的biBitCount次方
     uint32_t biClrImportant;    // 4byte，重要的颜色数，0代表所有颜色都重要
-}__attribute__((__packed__))BitmapInfoNode;
+})BitmapInfoNode;
 
 /* BMP位图头结构体 */
-typedef struct
+PACK(typedef struct
 {
     BitmapFileNode file;
     BitmapInfoNode info;
-}__attribute__((__packed__))BmpHeadNode;
+})BmpHeadNode;
 
 #ifdef _WIN32
     uint16_t bfType;

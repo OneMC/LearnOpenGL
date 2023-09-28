@@ -9,6 +9,9 @@
 #define DebugOGL_hpp
 
 #include <glad/glad.h>
+#ifdef _WIN32
+#include <stdint.h>
+#endif
 
 GLenum glCheckError_(const char *file, int line);
 #define glCheckError() glCheckError_(__FILE__, __LINE__)
